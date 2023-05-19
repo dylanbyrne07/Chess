@@ -5,6 +5,7 @@ from pieces import *
 from settings import *
 
 
+
 from Pieces.King import King
 from Pieces.Queen import Queen
 from Pieces.Rook import Rook
@@ -12,6 +13,7 @@ from Pieces.Knight import Knight
 from Pieces.Bishop import Bishop
 from Pieces.Pawn import Pawn
 
+from FEN_engine import *
 
 
 class Chess:
@@ -26,6 +28,9 @@ class Chess:
         self.Pieces = pygame.sprite.Group()
         self.tile_rects = []
         pos_num = -1
+
+        fen =  'r1b1k1nr/p2p1pNp/n2B4/1p1NP2P/6P1/3P1Q2/P1P1K3/q5b1'
+        board = parse_FEN(fen)
         for row_index, row in enumerate(board):
             pos_num += 1
             for col_index, col in enumerate(row):
@@ -42,42 +47,45 @@ class Chess:
                     self.tiles.add(tile)
                 #CAN POSITION PIECES AT ANY POINT ON THE BOARD
                 if col == 'K':
-                    if y > (SCREEN_HEIGHT//2):
-                        king = King(x, y, 'white')
-                    else:
-                        king = King(x, y, 'black')
+                    king = King(x, y, 'white')
+                    self.Pieces.add(king)
+                elif col == 'k':
+                    king = King(x, y, 'black')
                     self.Pieces.add(king)
                 if col == 'Q':
-                    if y > (SCREEN_HEIGHT//2):
-                        queen = Queen(x, y, 'white')
-                    else:
-                        queen = Queen(x, y, 'black')
+                    queen = Queen(x, y, 'white')
                     self.Pieces.add(queen)
+                elif col == 'q':
+                    queen = Queen(x, y, 'black')
+                    self.Pieces.add(queen)
+
                 if col == 'R':
-                    if y > (SCREEN_HEIGHT//2):
-                        rook = Rook(x, y, 'white')
-                    else:
-                        rook = Rook(x, y, 'black')
+                    rook = Rook(x, y, 'white')
                     self.Pieces.add(rook)
-                if col == 'N':
-                    if y > (SCREEN_HEIGHT//2):
-                        knight = Knight(x, y, 'white')
-                    else:
-                        knight = Knight(x, y, 'black')
-                    self.Pieces.add(knight)
+                elif col == 'r':
+                    rook = Rook(x, y, 'black')
+                    self.Pieces.add(rook)
+
                 if col == 'B':
-                    if y > (SCREEN_HEIGHT//2):
-                        bishop = Bishop(x, y, 'white')
-                    else:
-                        bishop = Bishop(x, y, 'black')
+                    bishop = Bishop(x, y, 'white')
                     self.Pieces.add(bishop)
+                elif col == 'b':
+                    bishop = Bishop(x, y, 'black')
+                    self.Pieces.add(bishop)
+
+                if col == 'N':
+                    knight = Knight(x, y, 'white')
+                    self.Pieces.add(knight)
+                elif col == 'n':
+                    knight = Knight(x, y, 'black')
+                    self.Pieces.add(knight)
+
                 if col == 'P':
-                    if y > (SCREEN_HEIGHT//2):
-                        pawn = Pawn(x, y, 'white')
-                    else:
-                        pawn = Pawn(x, y, 'black')
+                    pawn = Pawn(x, y, 'white')
                     self.Pieces.add(pawn)
-                
+                elif col == 'p':
+                    pawn = Pawn(x, y, 'black')
+                    self.Pieces.add(pawn)
     
         #SETUP PIECES-----------------------------------------------------------
     
