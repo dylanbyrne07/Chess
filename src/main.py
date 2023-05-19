@@ -15,11 +15,10 @@ pygame.init()
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
 
-level = Chess( screen)
+level = Chess(screen)
 
 def main():
     running = True
-    shoot = False
     while running:
 
         # Check events
@@ -27,7 +26,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-         
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos=pygame.mouse.get_pos()
+                level.movement(pos)
+                
+
 
         screen.fill((250, 250, 250))
  

@@ -1,14 +1,4 @@
-board = [
-    
-    'RNBQKBNR',
-    'PPPPPPPP',
-    '        ',
-    '        ',
-    '        ',
-    '        ',
-    'PPPPPPPP',
-    'RNBQKBNR',
-]
+
 tile_size = 100
 SCREEN_WIDTH = 8*tile_size
 SCREEN_HEIGHT = 8*tile_size

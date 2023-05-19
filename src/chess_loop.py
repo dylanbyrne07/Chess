@@ -20,17 +20,17 @@ from FEN_engine.parseFen import *
 class Chess:
     def __init__(self, surface):
         self.display_surface = surface
-        self.setup_level()
+        self.setup_board()
         
 
-    def setup_level(self):
+    def setup_board(self):
         # SETUP LEVEL_____________________________________________
         self.tiles = pygame.sprite.Group()
         self.Pieces = pygame.sprite.Group()
         self.tile_rects = []
         pos_num = -1
 
-        fen =  'r1b1k1nr/p2p1pNp/n2B4/1p1NP2P/6P1/3P1Q2/P1P1K3/q5b1'
+        fen =  '8/8/8/4p1K1/2k1P3/8/8/8'
         board = parse_FEN(fen)
         print(board)
         for row_index, row in enumerate(board):
@@ -89,6 +89,13 @@ class Chess:
                     pawn = Pawn(x, y, 'black')
                     self.Pieces.add(pawn)
     
+
+    def movement(self, mousepos):
+
+        for piece in self.Pieces:
+            if piece.rect.collidepoint(mousepos):
+                self.Pieces.remove(piece)
+        
         #SETUP PIECES-----------------------------------------------------------
     
     def run(self):
@@ -101,3 +108,4 @@ class Chess:
       #  self.move_pieces()
         self.Pieces.draw(self.display_surface)
         
+    
