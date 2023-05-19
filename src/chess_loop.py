@@ -13,7 +13,8 @@ from Pieces.Knight import Knight
 from Pieces.Bishop import Bishop
 from Pieces.Pawn import Pawn
 
-from FEN_engine import *
+from FEN_engine.parseFen import *
+#from FEN_engine.create_Fen import 
 
 
 class Chess:
@@ -31,6 +32,7 @@ class Chess:
 
         fen =  'r1b1k1nr/p2p1pNp/n2B4/1p1NP2P/6P1/3P1Q2/P1P1K3/q5b1'
         board = parse_FEN(fen)
+        print(board)
         for row_index, row in enumerate(board):
             pos_num += 1
             for col_index, col in enumerate(row):
