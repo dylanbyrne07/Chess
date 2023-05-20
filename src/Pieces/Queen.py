@@ -12,3 +12,7 @@ class Queen(Piece):
         self.image = pygame.transform.scale(self.image, (tile_size, tile_size))
         super().__init__(x, y, self.image)
 
+        self.colour = colour
+
+    def possible_moves(self, board):
+        pass

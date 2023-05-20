@@ -13,7 +13,7 @@ class Piece(pygame.sprite.Sprite):
         self.width = self.rect.width
         self.height = self.rect.height
     
-    def move():
-        print("mouse_pressed")
+  #  def possible_moves():
+   #     print("hello")
 
     

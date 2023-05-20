@@ -1,10 +1,9 @@
 import pygame
 from board.tile import Tile
+from board.possible_moves import Draw_possible_moves
 
 from pieces import *
 from settings import *
-
-
 
 from Pieces.King import King
 from Pieces.Queen import Queen
@@ -21,19 +20,20 @@ class Chess:
     def __init__(self, surface):
         self.display_surface = surface
         self.setup_board()
-        
+        self.players_go = 'white'
 
     def setup_board(self):
         # SETUP LEVEL_____________________________________________
         self.tiles = pygame.sprite.Group()
         self.Pieces = pygame.sprite.Group()
+        self.possible_moves = pygame.sprite.Group()
         self.tile_rects = []
         pos_num = -1
 
         fen =  '8/8/8/4p1K1/2k1P3/8/8/8'
-        board = parse_FEN(fen)
-        print(board)
-        for row_index, row in enumerate(board):
+        self.board = parse_FEN(eg)
+        print(self.board)
+        for row_index, row in enumerate(self.board):
             pos_num += 1
             for col_index, col in enumerate(row):
                 pos_num += 1
@@ -91,13 +91,31 @@ class Chess:
     
 
     def movement(self, mousepos):
-
-        for piece in self.Pieces:
-            if piece.rect.collidepoint(mousepos):
-                self.Pieces.remove(piece)
         
+        for piece in self.Pieces:
+            #if piece.colour == players_go:
+                if piece.rect.collidepoint(mousepos):
+                    print(piece)
+                    print(piece.x)
+                #  self.Pieces.remove(piece)
+                    possible_moves = piece.get_possible_moves(self.board)
+
+                    for move in possible_moves:
+                        print(move)
+                        pm = Draw_possible_moves(move[0]*tile_size + tile_size//2, move[1]*tile_size +  tile_size//2, tile_size//2, 'red')
+                        self.possible_moves.add(pm)
+                    
+                #show possible moves
+                #position = board[piece.x//tile_size][piece.y//tile_size]
         #SETUP PIECES-----------------------------------------------------------
     
+   # def update(self, event_list):
+   #     for event in event_list:
+     #       if event.type == pygame.MOUSEBUTTONDOWN:
+         #       pos=pygame.mouse.get_pos()
+        #        self.movement(pos, self.players_go)
+
+     
     def run(self):
         
         #Tiles---------------------------------------------------------------------------------------------
@@ -107,5 +125,5 @@ class Chess:
         
       #  self.move_pieces()
         self.Pieces.draw(self.display_surface)
-        
+        self.possible_moves.draw(self.display_surface)
     

@@ -11,3 +11,8 @@ class Rook(Piece):
             self.image = pygame.image.load(os.path.join(os.path.dirname(__file__), '..', '..', 'resources', 'rook-black-16x16.png' ))
         self.image = pygame.transform.scale(self.image, (tile_size, tile_size))
         super().__init__(x, y, self.image)
+
+        self.colour = colour
+
+    def possible_moves(self, board):
+        pass
